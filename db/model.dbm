@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.2.0-beta" use-changelog="false" max-obj-count="4"
+	 last-position="0,0" last-zoom="1" scene-rect="0,0,1570.8,1076.8"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="life_tracking_app"
+ createdb="true"
+ replication="true"
+ createrole="true"
+ inherit="true"
+ login="true"
+ connlimit="5"
+ password="life_track_app password">
+</role>
+
+<database name="life_tracking_db" is-template="false" allow-conns="true">
+	<role name="life_tracking_app"/>
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<table name="activity" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="life_tracking_app"/>
+	<position x="60" y="60"/>
+	<column name="id" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="title">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="started_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="finished_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="category_id">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="account_id">
+		<type name="varchar" length="0"/>
+	</column>
+<constraint name="activity_pk" type="pk-constr" table="public.activity">
+	<columns names="id" ref-type="src-columns"/>
+</constraint>
+
+</table>
+
+<table name="activity_category" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="life_tracking_app"/>
+	<position x="320" y="120"/>
+	<column name="id" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_DATE::TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+<constraint name="activity_category_pk" type="pk-constr" table="public.activity_category">
+	<columns names="id" ref-type="src-columns"/>
+</constraint>
+
+</table>
+
+<table name="account" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="life_tracking_app"/>
+	<position x="380" y="360"/>
+	<column name="id" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="username">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="created_at" default-value="CURRENT_DATE::TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+<constraint name="account_pk" type="pk-constr" table="public.account">
+	<columns names="id" ref-type="src-columns"/>
+</constraint>
+
+</table>
+
+<constraint name="fk_activity_category_id" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="SET NULL" ref-table="public.activity_category" table="public.activity">
+	<columns names="category_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_activity_account_id" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="SET NULL" ref-table="public.account" table="public.activity">
+	<columns names="account_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_activity_activity_category" type="relfk" layers="0"
+	 src-table="public.activity"
+	 dst-table="public.activity_category" reference-fk="fk_activity_category_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_activity_account" type="relfk" layers="0"
+	 src-table="public.activity"
+	 dst-table="public.account" reference-fk="fk_activity_account_id"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
