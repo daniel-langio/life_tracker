@@ -1,0 +1,236 @@
+openapi: 3.0.3
+
+info:
+  version: 0.1.0
+  title: life tracker api
+
+paths:
+  /ping:
+    get:
+      description: Ping pong endpoint
+      tags:
+        - Health
+      responses:
+        200:
+          description: ping response
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/PingResponse"
+
+  /api/accounts:
+    post:
+      description: Create accounts
+      tags:
+        - Account
+      requestBody:
+        $ref: "#/components/requestBodies/AccountCreation"
+      responses:
+        200:
+          description: accounts created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Account"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+          
+    get:
+      description: Get accounts information
+      tags:
+        - Account
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        200:
+          description: list of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Account"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    
+    put:
+      description: Update accounts
+      tags:
+        - Account
+      requestBody:
+        required: true
+        description: list of account to update
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountUpdate"
+      responses:
+        200:
+          description: accounts updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountUpdate"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+
+    delete:
+      description: Delete accounts
+      tags:
+        - Account
+      requestBody:
+        required: true
+        description: ids of accounts to delete
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                example:
+                  "393JEND03A8ZDNI3U"
+      responses:
+        200:
+          description: accounts deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Account"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+
+
+components:
+  
+  parameters:
+
+    Page:
+      in: query
+      name: page
+      required: false
+      schema:
+        type: integer
+        example: 1
+
+    PageSize:
+      in: query
+      name: pageSize
+      required: false
+      schema:
+        type: integer
+        example: 5
+
+
+  requestBodies:
+
+    AccountCreation:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/ObjectWithUserName"
+
+  responses:
+    
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorMessage" 
+
+  schemas:
+
+    Activity:
+      allOf:
+        - $ref: "#/components/schemas/ObjectWithId"
+      properties:
+        title:
+          type: string
+          example: "writing code"
+        description:
+          type: string
+          example: "continue coding mini mini tank pygame project"
+        startedAt:
+          type: string
+          format: date
+        finishedAt:
+          type: string
+          format: date
+        categoryId:
+          type: string
+          example: "WORK"
+        accountId:
+          type: string
+          example: "393JEND03A8ZDNI3U"
+        
+
+    ActivityCategory:
+      allOf:
+        - $ref: "#/components/schemas/ObjectWithId"
+        - $ref: "#/components/schemas/ObjectWithCreationDate"
+      properties:
+        name:
+          type: string
+          example: "work"
+        description:
+          type: string
+          example: "valuable activity"
+
+    AccountUpdate:
+      allOf:
+        - $ref: "#/components/schemas/ObjectWithId"
+        - $ref: "#/components/schemas/ObjectWithUserName"
+
+    Account:
+      allOf:
+        - $ref: "#/components/schemas/ObjectWithId"
+        - $ref: "#/components/schemas/ObjectWithUserName"
+        - $ref: "#/components/schemas/ObjectWithCreationDate"
+ 
+    ObjectWithCreationDate:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date
+
+    ObjectWithUserName:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "john_doe"
+
+    ObjectWithId:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "393JEND03A8ZDNI3U"
+
+    ErrorMessage:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Error"
+    
+    PingResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: pong
+
