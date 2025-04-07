@@ -1,0 +1,24 @@
+{
+  "name": "life_tracking_api",
+  "version": "0.1.0",
+  "description": "A simple activity tracking api.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch './src/**/*.ts' --watch './src/*.ts' --exec 'ts-node ./src/index.ts'",
+    "build": "tsc",
+    "start": "node ./dist/inde.js"
+  },
+  "keywords": [
+    "activity tracking",
+    "journal"
+  ],
+  "author": "Daniel Langio",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.1",
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
