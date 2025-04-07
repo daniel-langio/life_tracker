@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --watch './src/**/*.ts' --watch './src/*.ts' --exec 'ts-node ./src/index.ts'",
-    "build": "tsc",
-    "start": "node ./dist/inde.js"
+    "dev": "nodemon --watch './src/**/*.ts' --watch './src/*.ts' --exec 'ts-node -r tsconfig-paths/register ./src/index.ts'",
+    "build": "tsc && tsc-alias",
+    "start": "node ./dist/index.js"
   },
   "keywords": [
     "activity tracking",
@@ -19,10 +19,12 @@
   "devDependencies": {
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
-    "postgres": "^3.4.5"
+    "postgres": "^3.4.5",
+    "tsc-alias": "^1.8.13"
   }
 }
