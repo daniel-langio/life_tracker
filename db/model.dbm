@@ -3,7 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-beta" use-changelog="false" max-obj-count="4"
+<dbmodel pgmodeler-ver="1.2.0-beta1" use-changelog="false" max-obj-count="4"
+	 gen-disabled-objs-code="false" show-sys-schemas-rects="false"
 	 last-position="0,0" last-zoom="1" scene-rect="0,0,1570.8,1076.8"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
@@ -53,10 +54,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="account_id">
 		<type name="varchar" length="0"/>
 	</column>
-<constraint name="activity_pk" type="pk-constr" table="public.activity">
-	<columns names="id" ref-type="src-columns"/>
-</constraint>
-
+	<constraint name="activity_pk" type="pk-constr" table="public.activity">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="activity_category" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
@@ -75,10 +75,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="created_at" default-value="CURRENT_DATE::TIMESTAMP">
 		<type name="timestamp" length="0"/>
 	</column>
-<constraint name="activity_category_pk" type="pk-constr" table="public.activity_category">
-	<columns names="id" ref-type="src-columns"/>
-</constraint>
-
+	<constraint name="activity_category_pk" type="pk-constr" table="public.activity_category">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="account" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
@@ -94,10 +93,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="created_at" default-value="CURRENT_DATE::TIMESTAMP">
 		<type name="timestamp" length="0"/>
 	</column>
-<constraint name="account_pk" type="pk-constr" table="public.account">
-	<columns names="id" ref-type="src-columns"/>
-</constraint>
-
+	<constraint name="account_pk" type="pk-constr" table="public.account">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <constraint name="fk_activity_category_id" type="fk-constr" comparison-type="MATCH SIMPLE"
