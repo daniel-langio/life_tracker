@@ -15,7 +15,7 @@ paths:
           description: ping response
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/PingResponse"
 
   /api/accounts:
@@ -36,7 +36,7 @@ paths:
                   $ref: "#/components/schemas/Account"
         500:
           $ref: "#/components/responses/InternalServerError"
-          
+
     get:
       description: Get accounts information
       tags:
@@ -148,7 +148,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorMessage" 
+            $ref: "#/components/schemas/ErrorMessage"
 
   schemas:
 
@@ -174,7 +174,7 @@ components:
         accountId:
           type: string
           example: "393JEND03A8ZDNI3U"
-        
+
 
     ActivityCategory:
       allOf:
@@ -198,7 +198,7 @@ components:
         - $ref: "#/components/schemas/ObjectWithId"
         - $ref: "#/components/schemas/ObjectWithUserName"
         - $ref: "#/components/schemas/ObjectWithCreationDate"
- 
+
     ObjectWithCreationDate:
       type: object
       properties:
