@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Object for server states information
+ * */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
