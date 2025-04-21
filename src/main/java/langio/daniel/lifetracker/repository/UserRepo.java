@@ -81,8 +81,8 @@ public class UserRepo extends BaseDAO<User> implements DataProvider<User, String
 
     @Override
     public Integer update(User entity) {
-        String sql = "UPDATE account SET created_at = ?, username = ? WHERE id = ?";
-        List<Object> params = userMapper.toParams(entity).reversed();
+        String sql = "UPDATE account SET username = ? WHERE id = ?";
+        List<Object> params = userMapper.toParams(entity).reversed().subList(1, 3);
 
         return executeUpdate(sql, params);
     }
