@@ -104,6 +104,20 @@ public class UserRepo extends BaseDAO<User> implements DataProvider<User, String
         return executeUpdate(sql, List.of(id));
     }
 
+    public List<User> delete(List<String> ids) {
+        List<User> deleted = new ArrayList<>();
+
+        for (String id : ids) {
+            User user = get(id);
+            if (user.getId() != null) {
+                deleted.add(user);
+                delete(id);
+            }
+        }
+
+        return deleted;
+    }
+
     @Override
     public Boolean isExists(String id) {
         String sql = "SELECT username FROM account WHERE id = ?";
