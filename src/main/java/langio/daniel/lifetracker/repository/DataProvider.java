@@ -52,4 +52,12 @@ public interface DataProvider<T, I> {
      * */
     Integer delete(I id);
 
+    /**
+     * Check if an Object exist on the database
+     *
+     * @param id the identifier of the Object in the database
+     * @return true if the Object exists, false otherwise
+     * */
+    Boolean isExists(I id);
+
 }
