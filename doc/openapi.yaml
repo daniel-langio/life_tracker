@@ -5,18 +5,18 @@ info:
   title: life tracker api
 
 paths:
-  /ping:
+  /api/health:
     get:
-      description: Ping pong endpoint
+      description: Health check endpoint
       tags:
         - Health
       responses:
         200:
-          description: ping response
+          description: Server states
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PingResponse"
+                $ref: "#/components/schemas/ServerStates"
 
   /api/accounts:
     post:
@@ -226,11 +226,16 @@ components:
         error:
           type: string
           example: "Error"
-    
-    PingResponse:
+
+    ServerStates:
       type: object
       properties:
-        message:
-          type: string
-          example: pong
+        status:
+          $ref: "#/components/schemas/ServerStatus"
 
+    ServerStatus:
+      type: string
+      enum:
+        - UP
+        - IN_MAINTENANCE
+      example: UP
