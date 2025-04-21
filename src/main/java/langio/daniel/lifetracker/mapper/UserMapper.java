@@ -37,7 +37,9 @@ public class UserMapper implements ModelMapper<User>, DTOMapper<UserRest, User> 
 
             user.setId(rs.getString("id"));
             user.setUsername(rs.getString("username"));
-            user.setCreatedAt(LocalDateTime.parse(rs.getString("created_at")));
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+            user.setCreatedAt(LocalDateTime.parse(rs.getString("created_at"), formatter));
 
             return user;
         } catch (SQLException e) {
