@@ -1,5 +1,6 @@
 package langio.daniel.lifetracker.mapper;
 
+import langio.daniel.lifetracker.dto.CreateUserRest;
 import langio.daniel.lifetracker.dto.UpdateUserRest;
 import langio.daniel.lifetracker.dto.UserRest;
 import langio.daniel.lifetracker.model.User;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Converter for user's objects
@@ -73,6 +75,22 @@ public class UserMapper implements ModelMapper<User>, DTOMapper<UserRest, User> 
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
         user.setCreatedAt(LocalDateTime.parse(dto.getCreationDate()));
+
+        return user;
+    }
+
+    /**
+     * Creates an {@link User} from a {@link CreateUserRest}
+     * <p>
+     * @param createUser the {@link CreateUserRest}
+     * @return {@link User} containing the data of {@link Create UserRest}
+     * */
+    public User toModel(CreateUserRest createUser) {
+        User user = new User();
+
+        user.setId(UUID.randomUUID().toString());
+        user.setUsername(createUser.getUsername());
+        user.setCreatedAt(LocalDateTime.now());
 
         return user;
     }

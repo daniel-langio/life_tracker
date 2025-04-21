@@ -1,5 +1,6 @@
 package langio.daniel.lifetracker.service;
 
+import langio.daniel.lifetracker.dto.CreateUserRest;
 import langio.daniel.lifetracker.dto.UpdateUserRest;
 import langio.daniel.lifetracker.dto.UserRest;
 import langio.daniel.lifetracker.mapper.UserMapper;
@@ -48,7 +49,25 @@ public class UserService {
     }
 
     /**
-     * Update multiple user
+     * Creates multiple user
+     *
+     * @param creates list of {@link UpdateUserRest} representing what to update
+     * @return list of updated {@link UserRest}
+     * */
+    public List<UserRest> createUsers(List<CreateUserRest> creates) {
+        List<User> createdUsers = new ArrayList<>();
+
+        creates.forEach(create -> {
+            User user = userMapper.toModel(create);
+            userRepo.add(user);
+            createdUsers.add(user);
+        });
+
+        return userMapper.toDTOs(createdUsers);
+    }
+
+    /**
+     * Updates multiple user
      *
      * @param users list of {@link UpdateUserRest} representing what to update
      * @return list of updated {@link UserRest}
@@ -66,7 +85,7 @@ public class UserService {
     }
 
     /**
-     * Delete multiple user
+     * Deletes multiple user
      *
      * @param ids list of user id to delete
      * @return list of deleted user in {@link UserRest} format
