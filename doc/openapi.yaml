@@ -93,9 +93,7 @@ paths:
             schema:
               type: array
               items:
-                type: string
-                example:
-                  "393JEND03A8ZDNI3U"
+                $ref: "#/components/parameters/Identifier"
       responses:
         200:
           description: accounts deleted
@@ -112,6 +110,14 @@ paths:
 components:
   
   parameters:
+
+    Identifier:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+        example: "uznduznduz"
 
     Page:
       in: query
