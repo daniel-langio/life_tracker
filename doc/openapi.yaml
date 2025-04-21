@@ -77,7 +77,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountUpdate"
+                  $ref: "#/components/schemas/Account"
         500:
           $ref: "#/components/responses/InternalServerError"
 

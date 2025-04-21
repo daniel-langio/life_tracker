@@ -1,5 +1,6 @@
 package langio.daniel.lifetracker.mapper;
 
+import langio.daniel.lifetracker.dto.UpdateUserRest;
 import langio.daniel.lifetracker.dto.UserRest;
 import langio.daniel.lifetracker.model.User;
 import lombok.AllArgsConstructor;
@@ -72,6 +73,22 @@ public class UserMapper implements ModelMapper<User>, DTOMapper<UserRest, User> 
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
         user.setCreatedAt(LocalDateTime.parse(dto.getCreationDate()));
+
+        return user;
+    }
+
+    /**
+     * Creates an {@link User} from a {@link UpdateUserRest}
+     * <p>
+     * Note: the returned {@link User} of this method should ONLY be used in repository update, NOT for User creation.
+     * @param update the {@link UpdateUserRest}
+     * @return {@link User} containing the data of {@link UpdateUserRest}
+     * */
+    public User toModel(UpdateUserRest update) {
+        User user = new User();
+
+        user.setId(update.getId());
+        user.setUsername(update.getUsername());
 
         return user;
     }
