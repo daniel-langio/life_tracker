@@ -79,6 +79,11 @@ public class UserRepo extends BaseDAO<User> implements DataProvider<User, String
         return executeUpdate(sql, params);
     }
 
+    public User updatePlus(User entity) {
+        update(entity);
+        return get(entity.getId());
+    }
+
     @Override
     public Integer update(User entity) {
         String sql = "UPDATE account SET username = ? WHERE id = ?";
