@@ -3,6 +3,7 @@ package langio.daniel.lifetracker.mapper;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 /**
  * Model mapper
@@ -19,4 +20,12 @@ public interface ModelMapper<T> {
      * @return Object with data from database
      */
     T toModel(ResultSet rs);
+
+    /**
+     * Extract the Object's properties
+     *
+     * @param entity Object to extract properties from
+     * @return list of the Object's properties with a specific order
+     * */
+    List<Object> toParams(T entity);
 }
