@@ -106,6 +106,87 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
 
+  /api/activities:
+    get:
+      description: Get all activities
+      tags:
+        - Activity
+      responses:
+        200:
+          description: list of activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+
+    post:
+      description: Record activities
+      tags:
+        - Activity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/ActivityCreate"
+      responses:
+        200:
+          description: List of recorder activity
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+
+    put:
+      description: Update activity records
+      tags:
+        - Activity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Activity"
+      responses:
+        200:
+          description: List of updated activity
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+            
+    delete:
+      description: Delete activities records
+      tags:
+        - Activity
+      requestBody:
+        required: true
+        description: ids of activities to delete
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/parameters/Identifier"
+      responses:
+        200:
+          description: deleted activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
 
 components:
   
@@ -161,6 +242,13 @@ components:
     Activity:
       allOf:
         - $ref: "#/components/schemas/ObjectWithId"
+        - $ref: "#/components/requestBodies/AccountCreation"
+
+    ActivityCreate:
+      type: object
+      required:
+        - title
+        - startedAt
       properties:
         title:
           type: string
@@ -180,7 +268,6 @@ components:
         accountId:
           type: string
           example: "393JEND03A8ZDNI3U"
-
 
     ActivityCategory:
       allOf:
