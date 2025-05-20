@@ -39,8 +39,8 @@ public class UserRepo extends BaseDAO<User> implements DataProvider<User, String
 
         if (page != null && pageSize != null) {
             sql += "LIMIT ? OFFSET ?";
-            params.add(page);
             params.add(pageSize);
+            params.add(pageSize * (page - 1));
         }
 
         executeQuery(sql, params, result -> {
