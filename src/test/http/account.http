@@ -1,0 +1,44 @@
+### GET /api/accounts paginated
+GET {{baseUrl}}/api/accounts?
+    page=1&
+    pageSize=2
+Accept: application/json
+
+### GET /api/accounts all
+GET {{baseUrl}}/api/accounts
+Accept: application/json
+
+### POST /api/accounts
+POST {{baseUrl}}/api/accounts
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "username": "john"
+  },
+  {
+    "username": "jane"
+  }
+]
+
+### PUT /api/accounts
+PUT {{baseUrl}}/api/accounts
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "id": "9125cfad-c86f-444c-a43e-0819c84663b9",
+    "username": "john_updated"
+  }
+]
+
+### DELETE /api/accounts
+DELETE {{baseUrl}}/api/accounts
+Accept: application/json
+Content-Type: application/json
+
+[
+  "9125cfad-c86f-444c-a43e-0819c84663b9"
+]
