@@ -34,4 +34,21 @@ public class ActivityCategoryRepo extends BaseDAO<ActivityCategory>{
         return category.get();
     }
 
+    public ActivityCategory add(ActivityCategory activityCategory) {
+        String sql = "INSERT INTO activity_category (name, description, created_at) VALUES (?, ?, ?)";
+
+        executeUpdate(sql,
+                List.of(activityCategory.getName(), activityCategory.getDescription(), activityCategory.getCreatedAt()));
+
+        return activityCategory;
+    }
+
+    public boolean exists(String name) {
+        String sql = "SELECT id FROM activity_category WHERE name = ?";
+
+        return executeQuery(sql, List.of(name), (res ->
+            res.next() ? 1 : 0
+        )) == 1;
+    }
+
 }
